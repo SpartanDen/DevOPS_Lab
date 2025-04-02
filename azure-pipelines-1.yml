@@ -7,20 +7,16 @@ trigger:
 - main
 
 pool:
-  name: DevOps  # Make sure this pool has JDK 17 or allow JavaToolInstaller
+  name: DevOps  # Your self-hosted agent pool
 
 steps:
-# 1️⃣ Install JDK 17 first (required for Maven)
-- script: echo "##vso[task.setvariable variable=JAVA_HOME]C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot"
-  displayName: 'Set JAVA_HOME'
-# 2️⃣ Then run Maven
 - task: Maven@3
   displayName: 'Maven Package'
   inputs:
     mavenPomFile: 'happytails/pom.xml'
     mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'  # Must match the installed JDK
+    javaHomeOption: 'Path'  # Changed from JDKVersion to Path
+    jdkDirectory: 'C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot'  # Direct path to JDK
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
