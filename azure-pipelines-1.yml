@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: Deanna
+  name: DevOps
 
 steps:
 - task: Maven@3
