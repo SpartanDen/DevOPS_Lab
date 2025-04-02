@@ -7,15 +7,25 @@ trigger:
 - main
 
 pool:
-  name: DevOps
+  name: DevOps  # Make sure this pool has JDK 17 or allow JavaToolInstaller
 
 steps:
+# 1️⃣ Install JDK 17 first (required for Maven)
+- task: JavaToolInstaller@0
+  displayName: 'Install JDK 17'
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'  # Works on Microsoft-hosted agents
+
+# 2️⃣ Then run Maven
 - task: Maven@3
+  displayName: 'Maven Package'
   inputs:
     mavenPomFile: 'happytails/pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'
+    jdkVersionOption: '1.17'  # Must match the installed JDK
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
