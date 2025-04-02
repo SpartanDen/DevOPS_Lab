@@ -11,13 +11,8 @@ pool:
 
 steps:
 # 1️⃣ Install JDK 17 first (required for Maven)
-- task: JavaToolInstaller@0
-  displayName: 'Install JDK 17'
-  inputs:
-    versionSpec: '17'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'  # Works on Microsoft-hosted agents
-
+- script: echo "##vso[task.setvariable variable=JAVA_HOME]C:\Program Files\Eclipse Adoptium\jdk-17.0.14.7-hotspot"
+  displayName: 'Set JAVA_HOME'
 # 2️⃣ Then run Maven
 - task: Maven@3
   displayName: 'Maven Package'
