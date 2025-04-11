@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Tails - Home</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e6ffe6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo Square */
+    .logo-box {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      background-color: #b0e6b0;
+      border-radius: 8px;
+    }
+
+    /* Top Controls */
+    .top-controls {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .top-controls button {
+      font-size: 18px;
+      padding: 8px 16px;
+      background-color: #ffe5b4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .top-controls button:hover {
+      background-color: #ffdb99;
+      transform: scale(1.05);
+    }
+
+    /* Map */
+    #map {
+      width: 90%;
+      height: 500px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Settings and Notifications */
+    .floating-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .floating-icons button {
+      font-size: 20px;
+      background-color: #d0f0d0;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 10px;
+      width: 90%;
+      display: flex;
+      justify-content: space-around;
+      background-color: #dfffdc;
+      padding: 12px;
+      border-radius: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .bottom-nav button {
+      font-size: 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <div class="logo-box"></div>
+
+  <!-- Top Buttons -->
+  <div class="top-controls">
+    <button id="catButton">🐱 Cat</button>
+    <button id="dogButton">🐶 Dog</button>
+  </div>
+
+  <!-- Settings & Notification -->
+  <div class="floating-icons">
+    <button title="Notifications">🔔</button>
+    <button title="Settings">⚙️</button>
+  </div>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <button title="Home">🏠</button>
+    <button title="Profile">👤</button>
+    <button title="Dog">🐶</button>
+    <button title="Cat">🐱</button>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // Map setup
+    var map = L.map('map').setView([20.5937, 78.9629], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Button click handling
+    document.getElementById("catButton").addEventListener("click", function() {
+      localStorage.setItem("animalType", "Cat");
+      window.location.href = "report.html";
+    });
+
+    document.getElementById("dogButton").addEventListener("click", function() {
+      localStorage.setItem("animalType", "Dog");
+      window.location.href = "report.html";
+    });
+  </script>
+</body>
+</html>
